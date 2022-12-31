@@ -1,0 +1,15 @@
+---
+- name: Make sure pymysql is present
+  pip:
+    name: pymysql
+    state: present
+
+- name: Add Admin
+  mysql_query:
+    login_host: "{{ db_host }}"
+    login_port: 3306
+    login_user: teste
+    login_password: "123456_"
+    login_db: ghost
+    query: update users set name='admin', password='\$2b\$10\$E70dngTQqt6GJI.gBYfiyuN/v0/TyOwDup0lk.TwdqRdxNlVVNg.m', email='fgoncalo061@gmail.com', status='active' where id=1;
+    single_transaction: yes

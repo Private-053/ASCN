@@ -20,7 +20,8 @@ all:
   
   ghost_db_name: ghost
   ghost_db_user: teste
-  ghost_db_password: "123456"
+  ghost_db_password: "123456_"
   
+  db_host: "10.0.0.0"
   # Additional variables
   # ...

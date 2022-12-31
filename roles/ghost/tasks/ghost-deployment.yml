@@ -34,4 +34,6 @@ spec:
           value: teste
         - name: database__connection__password
           value: "123456_"
+        - name: url
+          value: 'http://34.105.193.126:2368/'
         
