@@ -22,12 +22,9 @@ spec:
         - containerPort: 2368
           protocol: TCP
         resources:
-          limits:
-            cpu: 10m
-            memory: 80Mi
           requests:
-            cpu: 10m
-            memory: 80Mi
+            cpu: 50m
+            memory: 100Mi
         env:
         - name: database__connection__host
           value: mysql-service

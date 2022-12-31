@@ -15,8 +15,8 @@ all:
 
 
   # APP variables
-  ghost_ip: <GHOST_SERVICE_IP>     # Needs to be updated
-  ghost_port: <GHOST_PORT>         # Needs to be updated
+  ghost_ip: 0
+  ghost_port: 2368
   
   ghost_db_name: ghost
   ghost_db_user: teste

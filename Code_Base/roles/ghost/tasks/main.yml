@@ -1,6 +1,19 @@
 ---
+
 - name: Ghost Service
   shell: kubectl apply -f roles/ghost/tasks/ghost-service.yml
 
 - name: Ghost Deployment
   shell: kubectl apply -f roles/ghost/tasks/ghost-deployment.yml
+
+- name: Get external IP of load balancer
+  shell: kubectl get svc ghost-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+  register: external_ip
+  until: external_ip.stdout != ""
+  retries: 10
+  delay: 20
+
+- name: Set Ghost IP
+  set_fact:
+    ghost_ip: "{{ external_ip.stdout }}"
+
