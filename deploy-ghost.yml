@@ -14,11 +14,3 @@
       - ghost
   tags:
     - ghostinstall
-
-- name: DataBase Update
-  hosts: localhost
-  roles:
-      - bd_update
-  tags:
-    - bd_update
-      

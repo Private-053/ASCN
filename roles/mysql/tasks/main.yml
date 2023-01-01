@@ -19,3 +19,11 @@
 - name: Set DB IP
   set_fact:
     db_host: "{{ service_info.stdout }}"
+
+- name: Get MySQL Pod
+  shell: kubectl get pod -l app=mysql -o jsonpath='{.items[0].metadata.name}'
+  register: pod_name
+
+- name: Set MySQL Pod
+  set_fact:
+    mysql_pod: "{{ pod_name.stdout }}"

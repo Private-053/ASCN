@@ -17,8 +17,8 @@
 - name: Configure Ghost
   lineinfile:
       dest: roles/ghost/tasks/ghost-deployment.yml
-      regexp: '\"http.*2368\/\"'
-      line: "          value: 'http://{{ ghost_ip }}:2368/'"
+      regexp: '\"http.*80\/\"'
+      line: "          value: 'http://{{ ghost_ip }}:{{ ghost_port }}/'"
       state: present
 
 - name: Ghost Deployment
@@ -33,3 +33,6 @@
   until: result.status == 200
   retries: 5
   delay: 10
+
+- name: Add Admin
+  shell: kubectl exec "{{ mysql_pod }}" -c mysql -- mysql --user="teste" --password="123456_" --database="ghost" --execute="update users set name='admin', password='\$2b\$10\$E70dngTQqt6GJI.gBYfiyuN/v0/TyOwDup0lk.TwdqRdxNlVVNg.m', email='teste@ascn.com', status='active' where id=1;"

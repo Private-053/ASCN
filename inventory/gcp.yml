@@ -5,7 +5,7 @@ all:
   # GKE cluster variables
   gcp_project:  ascn-2223-369313               # ID of GCP Project
   gcp_auth_kind: serviceaccount            # Do not change
-  gcp_cred_file: ../ascn-2223-369313-2253d303ce96.json   # Path to service account keys (json file downloaded from GCP)
+  gcp_cred_file: ascn-2223-369313-2253d303ce96.json   # Path to service account keys (json file downloaded from GCP)
 
   gcp_zone: europe-west2-b
   gcp_image_type: ubuntu_containerd
@@ -16,12 +16,12 @@ all:
 
   # APP variables
   ghost_ip: 0
-  ghost_port: 2368
+  ghost_port: 80
   
   ghost_db_name: ghost
   ghost_db_user: teste
   ghost_db_password: "123456_"
   
-  db_host: "10.0.0.0"
+  mysql_pod: ""
   # Additional variables
   # ...
