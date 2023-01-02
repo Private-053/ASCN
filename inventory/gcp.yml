@@ -20,8 +20,10 @@ all:
   
   ghost_db_name: ghost
   ghost_db_user: teste
-  ghost_db_password: "123456_"
   
-  mysql_pod: ""
+  mysql_pod: mysql-deployment-86c9fd7bb7-m8gzn
+  ghost_pod: ghost-deployment-6d7bffc47c-j9w4w
+
+  pv_created: true 
   # Additional variables
   # ...

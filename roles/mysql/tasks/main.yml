@@ -1,4 +1,23 @@
 ---
+- name: MySQL Persistent Disk
+  when: pv_created is not true
+  shell: gcloud compute disks create mysql-pv --size=10GB --zone=europe-west2-b
+
+- name: MySQL Persistent Disk var
+  when: pv_created is false
+  set_fact:
+    pv_created: true
+
+- name: MySQL Persistent Disk line
+  when: pv_created is false
+  lineinfile:
+      dest: inventory/gcp.yml
+      regexp: 'pv_created:'
+      line: '  pv_created: true'
+      state: present
+
+- name: MySQL PV
+  shell: kubectl apply -f roles/mysql/tasks/pv.yml
 
 - name: MySQL PVC
   shell: kubectl apply -f roles/mysql/tasks/mysql-pvc.yml 
@@ -12,18 +31,17 @@
 - name: MySQL Deployment
   shell: kubectl apply -f roles/mysql/tasks/mysql-deployment.yml
 
-- name: Updating IP
-  shell: kubectl get svc mysql-service -o jsonpath='{.spec.clusterIP}'
-  register: service_info
-
-- name: Set DB IP
-  set_fact:
-    db_host: "{{ service_info.stdout }}"
-
 - name: Get MySQL Pod
   shell: kubectl get pod -l app=mysql -o jsonpath='{.items[0].metadata.name}'
   register: pod_name
 
 - name: Set MySQL Pod
+  lineinfile:
+      dest: inventory/gcp.yml
+      regexp: 'mysql_pod:'
+      line: '  mysql_pod: {{ pod_name.stdout }}'
+      state: present
+
+- name: Set Var
   set_fact:
     mysql_pod: "{{ pod_name.stdout }}"

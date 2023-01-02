@@ -17,7 +17,7 @@
 - name: Configure Ghost
   lineinfile:
       dest: roles/ghost/tasks/ghost-deployment.yml
-      regexp: '\"http.*80\/\"'
+      regexp: 'http.*80\/'
       line: "          value: 'http://{{ ghost_ip }}:{{ ghost_port }}/'"
       state: present
 
@@ -35,4 +35,19 @@
   delay: 10
 
 - name: Add Admin
-  shell: kubectl exec "{{ mysql_pod }}" -c mysql -- mysql --user="teste" --password="123456_" --database="ghost" --execute="update users set name='admin', password='\$2b\$10\$E70dngTQqt6GJI.gBYfiyuN/v0/TyOwDup0lk.TwdqRdxNlVVNg.m', email='teste@ascn.com', status='active' where id=1;"
+  shell: kubectl exec {{ mysql_pod }} -c mysql -- mysql --user="teste" --password={{ ghost_db_password }} --database="ghost" --execute="update users set name='ascn', password='\$2b\$10\$eK1eSDuggYcxSlkALF/1Lugmz849DTXAp.nPBXpgW4t/Tl0j2GJVy', email='ascn@example.com', status='active' where id=1;"
+
+- name: Get Ghost Pod
+  shell: kubectl get pod -l app=ghost -o jsonpath='{.items[0].metadata.name}'
+  register: pod_name
+
+- name: Set Ghost Pod
+  lineinfile:
+      dest: inventory/gcp.yml
+      regexp: 'ghost_pod:'
+      line: '  ghost_pod: {{ pod_name.stdout }}'
+      state: present
+
+- name: Set Var
+  set_fact:
+    ghost_pod: "{{ pod_name.stdout }}"

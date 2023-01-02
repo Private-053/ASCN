@@ -9,6 +9,8 @@
     - dbinstall
 
 - name: Ghost install and start
+  vars_files:
+    - secrets.yml
   hosts: localhost
   roles:
       - ghost

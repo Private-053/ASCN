@@ -1,10 +1,23 @@
 ---
 - name: Delete Pods
-  shell: kubectl delete pod --all 
+  shell: kubectl delete pod --all
 
 - name: Delete Deployments
   shell: kubectl delete deployment.apps --all
 
 - name: Delete Services
   shell: kubectl delete service --all
+
+- name: Delete PV
+  shell: kubectl delete pv --all
+  when: hostvar['delete_data'] is defined and hostvar['delete_data'] is true
+
+- name: Delete PV Gloud
+  shell: gcloud compute disks delete mysql-pv
+  when: hostvar['delete_data'] is defined and hostvar['delete_data'] is true
+
+- name: Set Var
+  set_fact:
+    pv_created: false
+  when: hostvar['delete_data'] is defined and hostvar['delete_data'] is true
 

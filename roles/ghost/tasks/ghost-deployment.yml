@@ -35,6 +35,8 @@ spec:
         - name: database__connection__password
           value: "123456_"
         - name: url
-          value: 'http://34.105.193.126:80/'
-        
           value: 'http://35.246.43.126:80/'
+        - name: mail__options__auth__user
+          value: ascn.35
+        - name: mail__options__auth__pass
+          value: "grupo_35"

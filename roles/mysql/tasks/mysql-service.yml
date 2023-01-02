@@ -14,3 +14,4 @@ spec:
   ports:
     - targetPort: 3306 # port that containers are listening on
       port: 3306 # port number exposed internally in the cluster
+      
