@@ -30,14 +30,14 @@ spec:
         - name: MYSQL_USER
           value: teste
         - name: MYSQL_PASSWORD
-          value: "123456_" # Use Secret object in real usage
+          value: $PASS # Use Secret object in real usage
         ports:
         - containerPort: 3306
         volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: "/mnt/data"
+        - mountPath: /var/lib/mysql
+          name: mysql-v
       volumes:
-      - name: mysql-persistent-storage
+      - name: mysql-v
         persistentVolumeClaim:
-          claimName: mysql-pv-claim
+          claimName: mysql-pvc
           

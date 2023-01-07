@@ -7,17 +7,11 @@
 
 - name: Delete Services
   shell: kubectl delete service --all
+  
+- name: Delete PVC
+  shell: kubectl delete pvc --all
+  when: delete_data is defined and delete_data == 'true'
 
-- name: Delete PV
+- name: Delete PVC
   shell: kubectl delete pv --all
-  when: hostvar['delete_data'] is defined and hostvar['delete_data'] is true
-
-- name: Delete PV Gloud
-  shell: gcloud compute disks delete mysql-pv
-  when: hostvar['delete_data'] is defined and hostvar['delete_data'] is true
-
-- name: Set Var
-  set_fact:
-    pv_created: false
-  when: hostvar['delete_data'] is defined and hostvar['delete_data'] is true
-
+  when: delete_data is defined and delete_data == 'true'

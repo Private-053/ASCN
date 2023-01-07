@@ -2,6 +2,8 @@
 # Playbook to deploy Ghost and its components
 
 - name: DB install and start
+  vars_files:
+    - secrets.yml
   hosts: localhost 
   roles:
       - mysql

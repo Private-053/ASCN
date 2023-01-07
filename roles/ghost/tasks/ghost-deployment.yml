@@ -10,6 +10,8 @@ spec:
   selector:
     matchLabels:
       app: ghost
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -33,17 +35,10 @@ spec:
         - name: database__connection__user
           value: teste
         - name: database__connection__password
-          value: "123456_"
+          value: $PASS
         - name: url
           value: 'http://35.230.149.98:80/'
         - name: mail__options__auth__user
           value: ascn.35
         - name: mail__options__auth__pass
-          value: "grupo_35"
-        volumeMounts:
-        - name: ghost-persistent-storage
-          mountPath: "/usr/share/"
-      volumes:
-      - name: ghost-persistent-storage
-        persistentVolumeClaim:
-          claimName: ghost-pv-claim
+          value: $PASS_MAIL

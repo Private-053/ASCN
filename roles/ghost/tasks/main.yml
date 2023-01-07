@@ -1,11 +1,4 @@
 ---
-
-- name: Ghost PV
-  shell: kubectl apply -f roles/ghost/tasks/pv.yml
-
-- name: Ghost PVC
-  shell: kubectl apply -f roles/ghost/tasks/ghost-pvc.yml 
-
 - name: Ghost Service
   shell: kubectl apply -f roles/ghost/tasks/ghost-service.yml
 
@@ -20,8 +13,8 @@
   set_fact:
     ghost_ip: "{{ external_ip.stdout }}"
 
-- name: Print Ghost IP
-  msg: "{{ external_ip.stdout }}"
+-   debug: 
+      msg: "{{ external_ip.stdout }}"
 
 - name: Configure Ghost
   lineinfile:
@@ -31,7 +24,11 @@
       state: present
 
 - name: Ghost Deployment
-  shell: kubectl apply -f roles/ghost/tasks/ghost-deployment.yml
+  shell: |
+    export PASS={{ ghost_db_password }}
+    export PASS_MAIL={{ mail_password }}
+    envsubst < roles/ghost/tasks/ghost-deployment.yml | kubectl apply -f -
+    export PASS=""
 
 - name: Waiting for Ghost
   ansible.builtin.uri:

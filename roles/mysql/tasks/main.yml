@@ -1,19 +1,6 @@
 ---
-- name: MySQL Persistent Disk var
-  when: pv_created is false
-  set_fact:
-    pv_created: true
-
-- name: MySQL Persistent Disk line
-  when: pv_created is false
-  lineinfile:
-      dest: inventory/gcp.yml
-      regexp: 'pv_created:'
-      line: '  pv_created: true'
-      state: present
-
-- name: MySQL PV
-  shell: kubectl apply -f roles/mysql/tasks/pv.yml
+#- name: MySQL PV
+#  shell: kubectl apply -f roles/mysql/tasks/pv.yml
 
 - name: MySQL PVC
   shell: kubectl apply -f roles/mysql/tasks/mysql-pvc.yml 
@@ -22,14 +9,18 @@
 #  shell: kubectl apply -f roles/mysql/tasks/mysql-pod.yml 
 
 - name: MySQL Service
-  shell: kubectl apply -f roles/mysql/tasks/mysql-service.yml
+  shell: kubectl apply -f roles/mysql/tasks/mysql-service.yml 
 
 - name: MySQL Deployment
-  shell: kubectl apply -f roles/mysql/tasks/mysql-deployment.yml
+  shell: |
+    export PASS={{ ghost_db_password }}
+    envsubst < roles/mysql/tasks/mysql-deployment.yml | kubectl apply -f -
+    export PASS=""
 
 - name: Get MySQL Pod
   shell: kubectl get pod -l app=mysql -o jsonpath='{.items[0].metadata.name}'
   register: pod_name
+  delay: 10
 
 - name: Set MySQL Pod
   lineinfile:
@@ -41,3 +32,12 @@
 - name: Set Var
   set_fact:
     mysql_pod: "{{ pod_name.stdout }}"
+
+- name: Get MySQL PV
+  shell: kubectl get pv -o jsonpath='{.items[0].metadata.name}'
+  register: pv_name
+  retries: 10
+  delay: 10
+
+- name: Set Policy
+  shell: kubectl patch pv {{ pv_name.stdout }} -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'

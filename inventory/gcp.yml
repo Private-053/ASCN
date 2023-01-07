@@ -21,9 +21,8 @@ all:
   ghost_db_name: ghost
   ghost_db_user: teste
   
-  mysql_pod: mysql-deployment-746b8f9bcb-j25vc
-  ghost_pod: ghost-deployment-7c9b448f9f-hqbfh
+  mysql_pod: mysql-deployment-64f8dcfd8d-bl45h
+  ghost_pod: ghost-deployment-65b7b7f777-kwhfs
 
-  pv_created: true 
   # Additional variables
   # ...
