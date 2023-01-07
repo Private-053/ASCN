@@ -1,8 +1,4 @@
 ---
-- name: MySQL Persistent Disk
-  when: pv_created is not true
-  shell: gcloud compute disks create mysql-pv --size=10GB --zone=europe-west2-b
-
 - name: MySQL Persistent Disk var
   when: pv_created is false
   set_fact:
@@ -22,8 +18,8 @@
 - name: MySQL PVC
   shell: kubectl apply -f roles/mysql/tasks/mysql-pvc.yml 
 
-- name: MySQL Pod
-  shell: kubectl apply -f roles/mysql/tasks/mysql-pod.yml 
+#- name: MySQL Pod
+#  shell: kubectl apply -f roles/mysql/tasks/mysql-pod.yml 
 
 - name: MySQL Service
   shell: kubectl apply -f roles/mysql/tasks/mysql-service.yml

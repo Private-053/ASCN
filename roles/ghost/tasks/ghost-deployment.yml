@@ -35,8 +35,15 @@ spec:
         - name: database__connection__password
           value: "123456_"
         - name: url
-          value: 'http://35.246.43.126:80/'
+          value: 'http://35.230.149.98:80/'
         - name: mail__options__auth__user
           value: ascn.35
         - name: mail__options__auth__pass
           value: "grupo_35"
+        volumeMounts:
+        - name: ghost-persistent-storage
+          mountPath: "/usr/share/"
+      volumes:
+      - name: ghost-persistent-storage
+        persistentVolumeClaim:
+          claimName: ghost-pv-claim
