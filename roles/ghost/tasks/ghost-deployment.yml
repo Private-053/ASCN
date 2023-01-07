@@ -35,10 +35,10 @@ spec:
         - name: database__connection__user
           value: teste
         - name: database__connection__password
-          value: $PASS
+          value: "$PASS"
         - name: url
           value: 'http://35.230.149.98:80/'
         - name: mail__options__auth__user
           value: ascn.35
         - name: mail__options__auth__pass
-          value: $PASS_MAIL
+          value: "$PASS_MAIL"

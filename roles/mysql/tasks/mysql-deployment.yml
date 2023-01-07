@@ -30,7 +30,7 @@ spec:
         - name: MYSQL_USER
           value: teste
         - name: MYSQL_PASSWORD
-          value: $PASS # Use Secret object in real usage
+          value: "$PASS"
         ports:
         - containerPort: 3306
         volumeMounts:

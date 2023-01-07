@@ -1,0 +1,12 @@
+- name: Delete PVC
+  shell: kubectl delete pvc --all
+
+- name: Get MySQL PV
+  shell: kubectl get pv -o jsonpath='{.items[0].metadata.name}'
+  register: pv_name
+
+- name: Delete PV
+  shell: kubectl delete pv --all
+
+- name: Delete GCloud Disk
+  shell: gcloud compute disks delete {{ pv_name.stdout }}

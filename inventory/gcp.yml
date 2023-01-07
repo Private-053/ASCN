@@ -20,9 +20,4 @@ all:
   
   ghost_db_name: ghost
   ghost_db_user: teste
-  
-  mysql_pod: mysql-deployment-64f8dcfd8d-bl45h
-  ghost_pod: ghost-deployment-65b7b7f777-kwhfs
 
-  # Additional variables
-  # ...

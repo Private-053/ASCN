@@ -7,11 +7,3 @@
 
 - name: Delete Services
   shell: kubectl delete service --all
-  
-- name: Delete PVC
-  shell: kubectl delete pvc --all
-  when: delete_data is defined and delete_data == 'true'
-
-- name: Delete PVC
-  shell: kubectl delete pv --all
-  when: delete_data is defined and delete_data == 'true'

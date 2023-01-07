@@ -4,5 +4,4 @@
   hosts: localhost 
   roles:
       - undeploy
-  tags:
-      - deleteAll
+      - {role: undeploy_pv, when: "delete_data is defined and delete_data == 'true'"}
