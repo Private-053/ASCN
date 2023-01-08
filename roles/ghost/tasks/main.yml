@@ -29,6 +29,7 @@
     export PASS_MAIL={{ mail_password }}
     envsubst < roles/ghost/tasks/ghost-deployment.yml | kubectl apply -f -
     unset PASS
+    unset PASS_MAIL
 
 - name: Waiting for Ghost
   ansible.builtin.uri:

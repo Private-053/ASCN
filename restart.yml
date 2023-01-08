@@ -1,0 +1,3 @@
+- import_playbook: undeploy-ghost.yml
+
+- import_playbook: deploy-ghost.yml
