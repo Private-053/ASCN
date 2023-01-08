@@ -13,7 +13,9 @@
   retries: 3
   delay: 5
 
-- name: Check that you can add a User
+# ADD MEMBER - SIGN UP
+
+- name: Check that you can add a member
   ansible.builtin.uri:
     url: "http://{{ ghost_ip }}/members/api/send-magic-link/"
     method: POST
@@ -31,13 +33,14 @@
 - name: Check that mail was received in Mailtrap
   shell: | 
       export MAILTRAP_KEY={{ mailtrap_key }}
-      envsubst < test.py | python3 
+      envsubst < roles/test_ghost/template/test.py | python3 
       unset MAILTRAP_KEY
   register: result
 
 -    debug:
        msg: "{{ result.stdout.split('|') }}"
 
+# MEMBER SIGN-IN
 
 - name: Check that you can login
   ansible.builtin.uri:
@@ -57,7 +60,7 @@
 - name: Check that mail was received in Mailtrap
   shell: | 
       export MAILTRAP_KEY={{ mailtrap_key }}
-      envsubst < test.py | python3 
+      envsubst < roles/test_ghost/template/test.py | python3 
       unset MAILTRAP_KEY
   register: result
 
@@ -67,6 +70,8 @@
 - name: Get MySQL Pod
   shell: kubectl get pod -l app=mysql -o jsonpath='{.items[0].metadata.name}'
   register: pod_name
+
+# CHECK MEMBER IN MYSQL
 
 - name: Check new member in MySQL
   shell: kubectl exec {{ pod_name.stdout }} -c mysql -- mysql --user="teste" --password={{ ghost_db_password }} --database="ghost" --execute="select id from members where email='{{ new_user_email }}';"
@@ -79,9 +84,12 @@
   set_fact:
     result: "{{ result.stdout.split('\n')[1] }}"
 
+# CHECK NUMBER OF LOGINS
+
 - name: Check logins
   shell: kubectl exec {{ pod_name.stdout }} -c mysql -- mysql --user="teste" --password={{ ghost_db_password }} --database="ghost" --execute="select created_at from members_login_events where member_id='{{ result }}';"
   register: result
 
 -    debug:
        msg: "{{ result.stdout.split('\n') }}"
+
