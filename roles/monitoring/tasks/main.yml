@@ -1,0 +1,4 @@
+- name: Google roles
+  #install ansible-galaxy install googlecloudplatform.google_cloud_ops_agents
+  shell: ansible-galaxy install googlecloudplatform.google_cloud_ops_agents
+  register: result
