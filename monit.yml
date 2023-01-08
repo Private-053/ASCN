@@ -1,0 +1,4 @@
+# Installing the Monitoring and Logging agents
+- hosts: localhost
+  roles:
+    - monitoring

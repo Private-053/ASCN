@@ -1,4 +1,14 @@
-- name: Google roles
-  #install ansible-galaxy install googlecloudplatform.google_cloud_ops_agents
-  shell: ansible-galaxy install googlecloudplatform.google_cloud_ops_agents
+- name: Check Dashboards
+  shell: 'gcloud monitoring dashboards list --filter="displayName=Ghost Monitoring"'
   register: result
+  retries: 10
+  delay: 10
+
+- name: Change File
+  template:
+    src: roles/monitoring/template/monit_file.yml
+    dest: monit_file.json
+
+- name: Create Dashboard
+  shell: "gcloud monitoring dashboards create --config-from-file=monit_file.json"
+
