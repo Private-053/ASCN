@@ -2,10 +2,3 @@
 - hosts: localhost
   roles:
     - monitoring
-    - role: googlecloudplatform.google_cloud_ops_agents
-      vars:
-        agent_type: monitoring
-
-    - role: googlecloudplatform.google_cloud_ops_agents
-      vars:
-        agent_type: logging
