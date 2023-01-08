@@ -18,3 +18,11 @@
       - ghost
   tags:
     - ghostinstall
+
+
+- name: Monitoring install and start
+  hosts: localhost
+  roles:
+      - monitoring
+  tags:
+    - monit

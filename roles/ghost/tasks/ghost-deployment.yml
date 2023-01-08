@@ -37,11 +37,11 @@ spec:
         - name: database__connection__password
           value: "$PASS"
         - name: url
-          value: 'http://35.246.39.57:80/'
+          value: 'http://35.230.149.98:80/'
         - name: mail__options__auth__user
           value: "ad7e50d8973faf"
         - name: mail__options__auth__pass
-          value: "7a9b4a2b741388"
+          value: "$PASS_MAIL"
         - name: mail__transport
           value: "SMTP"
         - name: mail__options__port
@@ -52,10 +52,6 @@ spec:
           value: "smtp.mailtrap.io"
         - name: mail__from
           value: "GRUPO_35 <ascn.35@gmail.com>"
-        - name: support__email
-          value: "ascn.35@gmail.com"
-#        - name: mail__options__ignoreTLS
-#          value: "false"
 
 
         

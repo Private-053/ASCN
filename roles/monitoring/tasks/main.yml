@@ -1,5 +1,5 @@
 - name: Check Dashboards
-  shell: 'gcloud monitoring dashboards list --filter="displayName=Ghost Monitoring"'
+  shell: gcloud monitoring dashboards list --filter="displayName='Ghost Monitoring'"
   register: result
   retries: 10
   delay: 10
@@ -11,4 +11,5 @@
 
 - name: Create Dashboard
   shell: "gcloud monitoring dashboards create --config-from-file=monit_file.json"
+  when: result.stdout == ""
 

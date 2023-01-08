@@ -15,9 +15,11 @@ all:
 
 
   # APP variables
-  ghost_ip: 0
+  ghost_ip: '35.230.149.98'
   ghost_port: 80
   
   ghost_db_name: ghost
   ghost_db_user: teste
 
+  new_user: teste
+  new_user_email: teste@example.com

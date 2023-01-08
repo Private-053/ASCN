@@ -1,0 +1,34 @@
+SUBSCRIBE
+
+------
+
+await fetch("http://35.246.39.57/members/api/send-magic-link/", {
+    "credentials": "include",
+    "headers": {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0",
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Content-Type": "application/json"
+    },
+    "referrer": "http://35.246.39.57/",
+    "body": "{\"email\":\"abc@example.com\",\"requestSrc\":\"portal\"}",
+    "method": "POST",
+    "mode": "cors"
+});
+
+---------------
+LOGIN
+
+await fetch("http://35.246.39.57/members/api/send-magic-link/", {
+    "credentials": "include",
+    "headers": {
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0",
+        "Accept": "*/*",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Content-Type": "application/json"
+    },
+    "referrer": "http://35.246.39.57/",
+    "body": "{\"name\":\"boas\",\"email\":\"boas@example.com\",\"requestSrc\":\"portal\"}",
+    "method": "POST",
+    "mode": "cors"
+});

@@ -16,6 +16,13 @@
 -   debug: 
       msg: "{{ external_ip.stdout }}"
 
+- name: Change File Ghost Ip
+  lineinfile:
+      dest: inventory/gcp.yml
+      regexp: 'ghost_ip:.*'
+      line: "  ghost_ip: '{{ external_ip.stdout }}'"
+      state: present
+
 - name: Configure Ghost
   lineinfile:
       dest: roles/ghost/tasks/ghost-deployment.yml
