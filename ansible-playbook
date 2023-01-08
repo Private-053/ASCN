@@ -1,0 +1,1 @@
+ascn2223 -i inventory/gcp.yml deploy-ghost.yml --ask-vault-pass

@@ -52,6 +52,8 @@ spec:
           value: "smtp.mailtrap.io"
         - name: mail__from
           value: "GRUPO_35 <ascn.35@gmail.com>"
+        - name: support__email
+          value: "ascn.35@gmail.com"
 #        - name: mail__options__ignoreTLS
 #          value: "false"
 
