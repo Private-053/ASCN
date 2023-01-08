@@ -6,11 +6,11 @@
 
 - name: Change File
   template:
-    src: roles/monitoring/template/monit_file.yml
-    dest: monit_file.json
+    src:  roles/monitoring/template/monit_file.yml
+    dest: roles/monitoring/template/monit_file.json
 
 - name: Create Dashboard
-  shell: "gcloud monitoring dashboards create --config-from-file=monit_file.json"
+  shell: "gcloud monitoring dashboards create --config-from-file=roles/monitoring/template/monit_file.json"
   when: result.stdout == ""
 
 - name: Get First Node
@@ -23,11 +23,11 @@
 
 - name: Create Agents
   shell: |
-    :> agents_to_install.csv
-    echo '"projects/ascn-2223-369313/zones/europe-west2-b/instances/{{firstNode.stdout}}","[{""type"":""ops-agent""}]"' >> agents_to_install.csv
+    :> roles/monitoring/template/agents_to_install.csv
+    echo '"projects/ascn-2223-369313/zones/europe-west2-b/instances/{{firstNode.stdout}}","[{""type"":""ops-agent""}]"' >> roles/monitoring/template/agents_to_install.csv
     curl -sSO https://dl.google.com/cloudagents/mass-provision-google-cloud-ops-agents.py
-    python3 mass-provision-google-cloud-ops-agents.py --file agents_to_install.csv
-    :> agents_to_install.csv
-    echo '"projects/ascn-2223-369313/zones/europe-west2-b/instances/{{secondNode.stdout}}","[{""type"":""ops-agent""}]"' >> agents_to_install.csv
+    python3 mass-provision-google-cloud-ops-agents.py --file roles/monitoring/template/agents_to_install.csv
+    :> roles/monitoring/template/agents_to_install.csv
+    echo '"projects/ascn-2223-369313/zones/europe-west2-b/instances/{{secondNode.stdout}}","[{""type"":""ops-agent""}]"' >> roles/monitoring/template/agents_to_install.csv
     curl -sSO https://dl.google.com/cloudagents/mass-provision-google-cloud-ops-agents.py
-    python3 mass-provision-google-cloud-ops-agents.py --file agents_to_install.csv
+    python3 mass-provision-google-cloud-ops-agents.py --file roles/monitoring/template/agents_to_install.csv
