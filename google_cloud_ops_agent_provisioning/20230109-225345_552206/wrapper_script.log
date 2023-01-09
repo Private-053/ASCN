@@ -1,0 +1,8 @@
+2023-01-09T22:53:45.552 INFO Starting to read entries from file roles/monitoring/templates/agents_to_install.csv.
+2023-01-09T22:53:45.552 INFO Finished reading entried from file roles/monitoring/templates/agents_to_install.csv.
+2023-01-09T22:53:45.552 INFO Starting to parse and validate entries.
+2023-01-09T22:53:45.553 INFO Parsed and validated all entries successfully.
+2023-01-09T22:53:45.553 INFO Starting tasks on instances.
+2023-01-09T22:53:45.553 INFO Starting process on instance: projects/ascn-2223-369313/zones/europe-west2-b/instances/gke-ascn-cluster-default-pool-67165d57-4vcz.
+2023-01-09T22:53:45.553 INFO Instance: gke-ascn-cluster-default-pool-67165d57-4vcz - Starting process to run command: gcloud compute ssh gke-ascn-cluster-default-pool-67165d57-4vcz --project ascn-2223-369313 --zone europe-west2-b --quiet --strict-host-key-checking=no --ssh-flag '-o ConnectTimeout=20' --command "echo \"$(date -Ins) Starting running commands.\";curl -sSO https://dl.google.com/cloudagents/add-google-cloud-ops-agent-repo.sh; sudo bash add-google-cloud-ops-agent-repo.sh --also-install  --uninstall-standalone-logging-agent --uninstall-standalone-monitoring-agent; :; for i in {1..3}; do if (ps aux | grep 'opt[/].*google-cloud-ops-agent.*bin/'); then echo 'google-cloud-ops-agent runs successfully.'; break; fi; sleep 1s; done;echo \"$(date -Ins) Finished running commands.\"".
+2023-01-09T22:53:52.920 INFO Processed 1 VMs in 7.376479625701904 seconds.

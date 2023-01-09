@@ -53,4 +53,4 @@
   register: pod_name
 
 - name: Add Admin
-  shell: kubectl exec {{ pod_name.stdout }} -c mysql -- mysql --user="teste" --password={{ ghost_db_password }} --database="ghost" --execute="update users set name='ascn', password='\$2b\$10\$eK1eSDuggYcxSlkALF/1Lugmz849DTXAp.nPBXpgW4t/Tl0j2GJVy', email='ascn@example.com', status='active' where id=1;"
+  shell: kubectl exec {{ pod_name.stdout }} -c mysql -- mysql --user="teste" --password="{{ ghost_db_password }}" --database="ghost" --execute="update users set name='ascn', password='\$2b\$10\$eK1eSDuggYcxSlkALF/1Lugmz849DTXAp.nPBXpgW4t/Tl0j2GJVy', email='ascn@example.com', status='active' where id=1;"

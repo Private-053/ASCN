@@ -13,6 +13,8 @@
   retries: 3
   delay: 5
 
+# MORE TESTS
+
 # ADD MEMBER - SIGN UP
 
 - name: Check that you can add a member
@@ -33,7 +35,7 @@
 - name: Check that mail was received in Mailtrap
   shell: | 
       export MAILTRAP_KEY={{ mailtrap_key }}
-      envsubst < roles/test_ghost/template/test.py | python3 
+      envsubst < roles/test_ghost/templates/test.py | python3 
       unset MAILTRAP_KEY
   register: result
 
@@ -60,7 +62,7 @@
 - name: Check that mail was received in Mailtrap
   shell: | 
       export MAILTRAP_KEY={{ mailtrap_key }}
-      envsubst < roles/test_ghost/template/test.py | python3 
+      envsubst < roles/test_ghost/templates/test.py | python3 
       unset MAILTRAP_KEY
   register: result
 
@@ -93,3 +95,4 @@
 -    debug:
        msg: "{{ result.stdout.split('\n') }}"
 
+# 
