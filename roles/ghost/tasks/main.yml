@@ -45,8 +45,8 @@
     status_code: 200
   register: result
   until: result.status == 200
-  retries: 10
-  delay: 10
+  retries: 100
+  delay: 20
 
 - name: Get MySQL Pod
   shell: kubectl get pod -l app=mysql -o jsonpath='{.items[0].metadata.name}'
