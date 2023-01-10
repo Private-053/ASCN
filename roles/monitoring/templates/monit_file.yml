@@ -170,5 +170,5 @@
       }
     ]
   },
-  "name": "projects/958896657179/dashboards/10ecab9e-b017-489b-909c-1b5ded2cb84f"
+  "name": "projects/{{gcp_project}}/dashboards/ghost_monitoring"
 }
