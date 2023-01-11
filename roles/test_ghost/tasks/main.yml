@@ -94,5 +94,3 @@
 
 -    debug:
        msg: "{{ result.stdout.split('\n') }}"
-
-# 

@@ -4,4 +4,4 @@
   vars_files:
     - secrets.yml
   roles:
-    - { role: test_ghost }
+    - { role: test_post }

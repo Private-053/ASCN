@@ -34,3 +34,5 @@
     - secrets.yml
   roles:
     - { role: test_ghost }
+
+- import_playbook: undeploy-ghost.yml delete_data='true'
