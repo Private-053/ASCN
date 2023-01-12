@@ -7,3 +7,6 @@
 
 - name: Delete Services
   shell: kubectl delete service --all
+
+- name: Delete Dashboard
+  shell: gcloud monitoring dashboards delete 'ghost_monitoring' 

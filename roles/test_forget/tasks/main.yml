@@ -1,0 +1,13 @@
+---
+# Make a post
+# Create a session, and store the cookie in ghost-cookie.txt
+#- name: Create a session
+#  shell: 'curl -c ghost-cookie.txt -d username=ascn@example.com -d password={{ ghost_pass }} -H "Origin: http://{{ ghost_ip }}" -H "Accept-Version: v3.0" http://{{ ghost_ip }}/ghost/api/admin/session/'
+#
+#
+#await fetch("http://34.105.198.55/ghost/api/admin/authentication/password_reset/", {
+#    "referrer": "http://34.105.198.55/ghost/",
+#    "body": "{\"password_reset\":[{\"email\":\"contrib@exemplo.pt\"}]}",
+#    "method": "POST",
+#    "mode": "cors"
+#});

@@ -15,7 +15,7 @@ all:
 
 
   # APP variables
-  ghost_ip: '35.230.149.98'
+  ghost_ip: '34.105.198.55'
   ghost_port: 80
   
   ghost_db_name: ghost
