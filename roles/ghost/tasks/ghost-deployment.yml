@@ -37,7 +37,7 @@ spec:
         - name: database__connection__password
           value: "$PASS"
         - name: url
-          value: 'http://35.246.12.123:80/'
+          value: 'http://35.197.226.46:80/'
         - name: mail__options__auth__user
           value: "ad7e50d8973faf"
         - name: mail__options__auth__pass

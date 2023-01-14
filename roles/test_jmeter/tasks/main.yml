@@ -1,4 +1,9 @@
 ---
+- name: Change IP
+  template:
+    src: roles/test_jmeter/templates/jmeter.jmx
+    dest: jmeter/ghost_get_100_20.jmx
+
 - name: JMeter for 100 Users with loop of 2000
   shell: ./apache-jmeter-5.5/bin/jmeter -n -t 'jmeter/ghost_get_100_20.jmx' -l jmeter/res100
   register: result

@@ -26,3 +26,5 @@
       - monitoring
   tags:
     - monit
+
+- import_playbook: scale-ghost.yml
