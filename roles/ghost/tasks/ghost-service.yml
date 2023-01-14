@@ -10,6 +10,10 @@ spec:
   type: LoadBalancer # Makes the service accessible on a static port on each Node in the cluster.
   selector:
     app: ghost
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 500
   ports:
       # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
     - targetPort: 2368 # port that containers are listening on

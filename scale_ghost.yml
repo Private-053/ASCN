@@ -1,0 +1,6 @@
+---
+- name: Scale Ghost
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - command: kubectl autoscale deployment ghost-deployment --min=1 --max=10
