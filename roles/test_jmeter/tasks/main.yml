@@ -9,5 +9,5 @@
   register: result
 
 - debug:
-      msg: "{{ result.stdout }}"
+      msg: "{{ result.stdout.split('\n') }}"
 
