@@ -1,13 +1,26 @@
 ---
 # Make a post
 # Create a session, and store the cookie in ghost-cookie.txt
-#- name: Create a session
-#  shell: 'curl -c ghost-cookie.txt -d username=ascn@example.com -d password={{ ghost_pass }} -H "Origin: http://{{ ghost_ip }}" -H "Accept-Version: v3.0" http://{{ ghost_ip }}/ghost/api/admin/session/'
-#
-#
-#await fetch("http://34.105.198.55/ghost/api/admin/authentication/password_reset/", {
-#    "referrer": "http://34.105.198.55/ghost/",
-#    "body": "{\"password_reset\":[{\"email\":\"contrib@exemplo.pt\"}]}",
-#    "method": "POST",
-#    "mode": "cors"
-#});
+
+- name: Reset Password for "contrib@exemplo.pt" 
+  ansible.builtin.uri:
+    url: "http://{{ ghost_ip }}/ghost/api/admin/authentication/password_reset/"
+    method: POST
+    body:  '{"password_reset":[{"email":"contrib@exemplo.pt"}]}'
+    body_format: json
+    headers:
+      Content-Type: "application/json"
+    mode: cors
+  register: result
+
+- name: Call Python Script
+  shell: |
+    export MAILTRAP_KEY={{ mailtrap_key }}
+    export GHOST_IP={{ ghost_ip }}
+    envsubst < roles/test_forget/templates/test.py | python3 
+    unset MAILTRAP_KEY
+    unset GHOST_IP
+  register: result
+
+-    debug:
+       msg: "{{ result.stdout.split('|') }}"

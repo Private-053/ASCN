@@ -52,5 +52,23 @@
   shell: kubectl get pod -l app=mysql -o jsonpath='{.items[0].metadata.name}'
   register: pod_name
 
+- name: Set MySQL Pod
+  lineinfile:
+      dest: inventory/gcp.yml
+      regexp: "pod_name_sql: "
+      line: "  pod_name_sql: '{{ pod_name.stdout }}'"
+      state: present
+
 - name: Add Admin
   shell: kubectl exec {{ pod_name.stdout }} -c mysql -- mysql --user="teste" --password="{{ ghost_db_password }}" --database="ghost" --execute="update users set name='ascn', password='\$2b\$10\$eK1eSDuggYcxSlkALF/1Lugmz849DTXAp.nPBXpgW4t/Tl0j2GJVy', email='ascn@example.com', status='active' where id=1;"
+
+- name: Get Ghost Pod
+  shell: kubectl get pod -l app=ghost -o jsonpath='{.items[0].metadata.name}'
+  register: pod_name
+
+- name: Set Ghost Pod
+  lineinfile:
+      dest: inventory/gcp.yml
+      regexp: "pod_name_ghost: "
+      line: "  pod_name_ghost: '{{ pod_name.stdout }}'"
+      state: present

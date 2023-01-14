@@ -15,7 +15,7 @@ all:
 
 
   # APP variables
-  ghost_ip: '34.105.198.55'
+  ghost_ip: '35.197.226.46'
   ghost_port: 80
   
   ghost_db_name: ghost
@@ -23,3 +23,6 @@ all:
 
   new_user: teste
   new_user_email: teste@example.com
+
+  pod_name_sql: 'mysql-deployment-64f8dcfd8d-zm8t5'
+  pod_name_ghost: 'ghost-deployment-6599465cf9-lhvj8'

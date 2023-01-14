@@ -40,3 +40,6 @@
 
 -    debug:
        msg: "{{ result.stdout.split('|') }}"
+
+- name: Remove Cookies
+  shell: rm ghost-cookie.txt

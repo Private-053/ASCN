@@ -1,7 +1,29 @@
-- name: Tests
+- name: First Tests
   hosts: localhost
   gather_facts: yes
   vars_files:
     - secrets.yml
   roles:
-    - { role: test_forget }
+    - test_ghost
+  tags:
+    - ghost
+
+- name: Second Tests
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - secrets.yml
+  roles:
+    - test_post
+  tags:
+    - post
+
+- name: Third Tests
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - secrets.yml
+  roles:
+    - test_forget
+  tags:
+    - forget

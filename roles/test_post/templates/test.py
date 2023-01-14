@@ -18,6 +18,7 @@ r = requests.get(url, headers=headers)
 content = r.json()[:3]
 
 
+output = ""
 
 for i in range(3):
     id = content[i]['id']
@@ -29,7 +30,7 @@ for i in range(3):
     text = requests.get(message_url + '/body.txt', headers=headers)
 
     link = re.search(r"http(.*)\]\n",str(text.text)).group()[:-1]
-    output = "Subject: " + subject + "|"
+    output += "Subject: " + subject + "|"
     output += "To: " + to_email + "|"
     output += "Signup Link: " + link + "|"
 
@@ -42,6 +43,7 @@ for i in range(3):
     res = requests.post("http://"+"$GHOST_IP"+"/ghost/api/admin/authentication/invitation/", json = myobj)
 
     output += str(res.status_code) + "|"
+    output += "-----------------" + "|"
 
 print(output)
 

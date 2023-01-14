@@ -9,4 +9,4 @@
   shell: kubectl delete service --all
 
 - name: Delete Dashboard
-  shell: gcloud monitoring dashboards delete 'ghost_monitoring' 
+  shell: gcloud monitoring dashboards delete 'ghost_monitoring' --quiet
