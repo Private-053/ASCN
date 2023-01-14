@@ -27,3 +27,11 @@
     - test_forget
   tags:
     - forget
+
+- name: Fourth Tests
+  hosts: localhost
+  gather_facts: yes
+  roles:
+    - test_jmeter
+  tags:
+    - jmeter

@@ -1,0 +1,8 @@
+---
+- name: JMeter for 100 Users with loop of 2000
+  shell: ./apache-jmeter-5.5/bin/jmeter -n -t 'jmeter/ghost_get_100_20.jmx' -l jmeter/res100
+  register: result
+
+- debug:
+      msg: "{{ result.stdout }}"
+

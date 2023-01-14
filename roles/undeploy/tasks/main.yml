@@ -10,3 +10,7 @@
 
 - name: Delete Dashboard
   shell: gcloud monitoring dashboards delete 'ghost_monitoring' --quiet
+
+
+- name: Delete HPA
+  shell: kubectl delete hpa --all
